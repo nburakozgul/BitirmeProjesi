@@ -141,9 +141,9 @@ public class FileOrganizer {
 
 
 
-            /*for (int i = 0 ; i < datePetrol.size();i++) {
+            for (int i = 0 ; i < datePetrol.size();i++) {
                 writer.println(datePetrol.get(i)+" "+valuePetrol.get(i));
-            }*/
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -224,9 +224,9 @@ public class FileOrganizer {
             }
 
 
-            /*for (int i = 0 ; i < dateDolar.size();i++) {
+            for (int i = 0 ; i < dateDolar.size();i++) {
                 writer.println(dateDolar.get(i)+" "+valueDolar.get(i)+" "+dolarClass.get(i));
-            }*/
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -238,7 +238,7 @@ public class FileOrganizer {
     }
 
     public void createFile(String goldfile, String petrolFile, String dovizFile) throws IOException {
-        PrintWriter writer = new PrintWriter("dolar.txt", "UTF-8");
+        PrintWriter writer = new PrintWriter("data.txt", "UTF-8");
 
         organizePetrol(petrolFile);
         organizeDateAndValueGold(goldfile);
@@ -248,8 +248,11 @@ public class FileOrganizer {
 
 
         for (int i = 0 ; i < dateGold.size() ; i++) {
-            writer.println(dateDolar.get(i)+" "+valueDolar.get(i)+" "+dolarClass.get(i));
+            writer.println(dolarClass.get(i)+" 1:"+Double.parseDouble(valuePetrol.get(i))+" 2:"
+                    +Double.parseDouble(valueGold.get(i)));
         }
+
+        writer.close();
     }
 }
 
