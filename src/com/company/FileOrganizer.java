@@ -208,12 +208,11 @@ public class FileOrganizer {
                 if (dolarStep != 0.0) {
                      real = Double.parseDouble(valueDolar.get(i));
 
-                    if (real - dolarStep > 0.005)
-                        dolarClass.add(2);
+                    if (real - dolarStep >= 0.0)
+                        dolarClass.add(1);
                     else if (real - dolarStep < 0.0)
                         dolarClass.add(0);
-                    else
-                        dolarClass.add(1);
+
 
                 } else {
                     dolarClass.add(1);
@@ -246,10 +245,48 @@ public class FileOrganizer {
 
         System.out.println(dateDolar.size()+" "+dateGold.size()+" "+datePetrol.size());
 
+        int step = 0 ;
 
         for (int i = 0 ; i < dateGold.size() ; i++) {
-            writer.println(dolarClass.get(i)+" 1:"+Double.parseDouble(valuePetrol.get(i))+" 2:"
-                    +Double.parseDouble(valueGold.get(i)));
+
+            if (i >= 30)
+                writer.print(dolarClass.get(i));
+
+            for(int j = 30 ; j >= 1; j--) {
+                /*if (i - j >= 0 && i < 30) {
+                    int index2 = 2 * (i - j) + 2;
+                    int index = index2 - 1 ;
+
+                    writer.print(" "+index+":"+Double.parseDouble(valuePetrol.get(i-j))+" "+index2+":"
+                            +Double.parseDouble(valueGold.get(i-j)));
+                }*/
+
+                if (i >= 30) {
+                    int index2 = 2 * (30 - j) + 2;
+                    int index = index2 - 1 ;
+
+                    writer.print(" "+index+":"+Double.parseDouble(valuePetrol.get(i-j))+" "+index2+":"
+                            +Double.parseDouble(valueGold.get(i-j)));
+                }
+
+                /*if (i >= 30) {
+                    int index2 = 2 * (30 - j) + 2 + step;
+                    int index = index2 - 1 ;
+
+                    writer.print(" "+index+":"+Double.parseDouble(valuePetrol.get(i-j))+" "+index2+":"
+                            +Double.parseDouble(valueGold.get(i-j)));
+                }*/
+            }
+
+            /*writer.println(dolarClass.get(i)+" 1:"+Double.parseDouble(valuePetrol.get(i))+" 2:"
+                    +Double.parseDouble(valueGold.get(i)));*/
+
+            if (i >= 30) {
+                step++;
+                writer.println();
+            }
+
+
         }
 
         writer.close();
